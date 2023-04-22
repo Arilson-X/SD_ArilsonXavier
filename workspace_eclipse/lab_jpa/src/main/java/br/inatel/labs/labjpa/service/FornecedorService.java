@@ -28,7 +28,8 @@ public class FornecedorService {
 		return em.createQuery("select f from Fornecedor f", Fornecedor.class)
 				.getResultList();
 	}
-	
-	
+	public void remover(Fornecedor f) {
+		em.remove(em.merge(f));
+	}
 
 }

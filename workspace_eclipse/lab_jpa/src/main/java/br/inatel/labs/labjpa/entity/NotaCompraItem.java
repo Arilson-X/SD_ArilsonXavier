@@ -28,6 +28,27 @@ public class NotaCompraItem {
 	@Positive
 	private BigDecimal valorCompraProduto;
 	
+	@NotNull
+	@Positive
+	private Integer quantidade = 1;
+	
+	public NotaCompraItem() {
+		super();
+	}
+
+	public NotaCompraItem(NotaCompra notaCompra, Produto produto,
+			BigDecimal valorCompraProduto, Integer quantidade) {
+		super();
+		this.notaCompra = notaCompra;
+		this.produto = produto;
+		this.valorCompraProduto = valorCompraProduto;
+		this.quantidade = quantidade;
+	}
+
+	public BigDecimal getCalculoTotalItem(){
+		return valorCompraProduto.multiply(BigDecimal.valueOf(quantidade));
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -89,14 +110,6 @@ public class NotaCompraItem {
 	public String toString() {
 		return "NotaCompraItem [id=" + id + ", notaCompra=" + notaCompra + ", produto=" + produto
 				+ ", valorCompraProduto=" + valorCompraProduto + ", quantidade=" + quantidade + "]";
-	}
-
-	@NotNull
-	@Positive
-	private Integer quantidade = 1;
-	
-	public BigDecimal getCalculoTotalItem(){
-		return valorCompraProduto.multiply(BigDecimal.valueOf(quantidade));
 	}
 	
 }
