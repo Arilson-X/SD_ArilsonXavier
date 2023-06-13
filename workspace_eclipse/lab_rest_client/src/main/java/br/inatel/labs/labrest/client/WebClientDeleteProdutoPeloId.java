@@ -4,25 +4,18 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import br.inatel.labs.labrest.client.model.dto.ProdutoDTO;
-
-public class WebClientPutProduto {
+public class WebClientDeleteProdutoPeloId {
 	public static void main(String[] args) {
-		ProdutoDTO produtoExistente = new ProdutoDTO();
-		produtoExistente.setId( 1L );
-		produtoExistente.setDescricao("Furadeira a bateria");
-		
 		ResponseEntity<Void> responseEntity = WebClient.create("http:localhost:8080")
-				.put()
-				.uri("/produto")
-				.bodyValue(produtoExistente)
+				.delete()
+				.uri("/produto/3")
 				.retrieve()
 				.toBodilessEntity()
 				.block();
 		
 		HttpStatusCode statusCode = responseEntity.getStatusCode();
 		
-		System.out.println("Produto Atualizado");
+		System.out.println("Produto Removido");
 		System.out.println("Status da Resposta: " + statusCode);
 	}
 }

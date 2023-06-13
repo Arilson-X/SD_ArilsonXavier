@@ -14,10 +14,14 @@ public class WebClientPostProduto {
 		novoProduto.setDescricao("Martelo");
 		novoProduto.setPreco(new BigDecimal(25.00));
 		
-		Flux<ProdutoDTO> produtoCriado = WebClient.create("http://localhost:8080")
+		ProdutoDTO produtoCriado = WebClient.create("http://localhost:8080")
 				.post()
 				.uri("/produto")
+				.bodyValue(novoProduto)
 				.retrieve()
-				.bodyToFlux(ProdutoDTO.class);
+				.bodyToMono(ProdutoDTO.class)
+				.block();
+		System.out.println("Produto Criado");
+		System.out.println(produtoCriado);
 	}
 }
